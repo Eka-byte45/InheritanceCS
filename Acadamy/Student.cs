@@ -53,6 +53,11 @@ namespace Acadamy
             base.ToString() +
             $"{Speciality.PadRight(22)}{Group.PadRight(8)}{Rating.ToString().PadRight(8)}{Attendance.ToString().PadRight(8)}";
 		}
+		public override string ToStringCSV()
+		{
+			return base.ToStringCSV()
+				+$",{Speciality},{Group},{Rating}{Attendance}";
+		}
 	}
 
 }

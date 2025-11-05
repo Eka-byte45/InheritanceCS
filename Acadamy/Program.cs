@@ -21,71 +21,71 @@ namespace Acadamy
 		//	streamWriter.WriteLine(human.ToString());
 		//	streamWriter.Close();
 		//}
-		public static void Save(Human[] group, string fileName)
-		{
-			using (StreamWriter sw = new StreamWriter(fileName))
-			{
-				foreach (Human human in group)
-				{
-					if (human is Human h && !(h is Teacher || h is Student || h is Graduate))
-					{
+		//public static void Save(Human[] group, string fileName)
+		//{
+		//	using (StreamWriter sw = new StreamWriter(fileName))
+		//	{
+		//		foreach (Human human in group)
+		//		{
+		//			if (human is Human h && !(h is Teacher || h is Student || h is Graduate))
+		//			{
 						
-						sw.WriteLine("Human,{0},{1},{2}", h.LastName, h.FirstName, h.Age);
-					}
-					else if (human is Teacher t)
-					{
+		//				sw.WriteLine("Human,{0},{1},{2}", h.LastName, h.FirstName, h.Age);
+		//			}
+		//			else if (human is Teacher t)
+		//			{
 						
-						sw.WriteLine("Teacher,{0},{1},{2},{3},{4}",
-							t.LastName, t.FirstName, t.Age, t.Speciality, t.Experience);
-					}
-					else if (human is Graduate g)
-					{
+		//				sw.WriteLine("Teacher,{0},{1},{2},{3},{4}",
+		//					t.LastName, t.FirstName, t.Age, t.Speciality, t.Experience);
+		//			}
+		//			else if (human is Graduate g)
+		//			{
 						
-						sw.WriteLine("Graduate,{0},{1},{2},{3},{4},{5},{6},{7}",
-							g.LastName, g.FirstName, g.Age, g.Speciality, g.Group, g.Rating, g.Attendance, g.Subject);
-					}
-					else if (human is Student s)
-					{
+		//				sw.WriteLine("Graduate,{0},{1},{2},{3},{4},{5},{6},{7}",
+		//					g.LastName, g.FirstName, g.Age, g.Speciality, g.Group, g.Rating, g.Attendance, g.Subject);
+		//			}
+		//			else if (human is Student s)
+		//			{
 						
-						sw.WriteLine("Student,{0},{1},{2},{3},{4},{5},{6}",
-							s.LastName, s.FirstName, s.Age, s.Speciality, s.Group, s.Rating, s.Attendance);
-					}
-				}
-			}
-		}
-		public static Human[] Load(string filename)
-		{
-			List<Human> result = new List<Human>();
+		//				sw.WriteLine("Student,{0},{1},{2},{3},{4},{5},{6}",
+		//					s.LastName, s.FirstName, s.Age, s.Speciality, s.Group, s.Rating, s.Attendance);
+		//			}
+		//		}
+		//	}
+		//}
+		//public static Human[] Load(string filename)
+		//{
+		//	List<Human> result = new List<Human>();
 
-			using (StreamReader sr = new StreamReader(filename))
-			{
-				while (!sr.EndOfStream)
-				{
-					string line = sr.ReadLine()?.Trim();
-					if (string.IsNullOrEmpty(line)) continue; 
+		//	using (StreamReader sr = new StreamReader(filename))
+		//	{
+		//		while (!sr.EndOfStream)
+		//		{
+		//			string line = sr.ReadLine()?.Trim();
+		//			if (string.IsNullOrEmpty(line)) continue; 
 
-					string[] parts = line.Split(',');
-					if (parts.Length < 3) continue; 
+		//			string[] parts = line.Split(',');
+		//			if (parts.Length < 3) continue; 
 
-					switch (parts[0])
-					{
-						case "Human":
-							result.Add(new Human(parts[1], parts[2], int.Parse(parts[3]))); break;
-						case "Teacher":
-							result.Add(new Teacher(parts[1], parts[2], int.Parse(parts[3]), parts[4], int.Parse(parts[5]))); break;
-						case "Student":
-							result.Add(new Student(parts[1], parts[2], int.Parse(parts[3]), parts[4], parts[5], int.Parse(parts[6]), double.Parse(parts[7]))); break;
-						case "Graduate":
-							result.Add(new Graduate(parts[1], parts[2], int.Parse(parts[3]), parts[4], parts[5], int.Parse(parts[6]), double.Parse(parts[7]), parts[8])); break;
-						default:
-							continue; 
+		//			switch (parts[0])
+		//			{
+		//				case "Human":
+		//					result.Add(new Human(parts[1], parts[2], int.Parse(parts[3]))); break;
+		//				case "Teacher":
+		//					result.Add(new Teacher(parts[1], parts[2], int.Parse(parts[3]), parts[4], int.Parse(parts[5]))); break;
+		//				case "Student":
+		//					result.Add(new Student(parts[1], parts[2], int.Parse(parts[3]), parts[4], parts[5], int.Parse(parts[6]), double.Parse(parts[7]))); break;
+		//				case "Graduate":
+		//					result.Add(new Graduate(parts[1], parts[2], int.Parse(parts[3]), parts[4], parts[5], int.Parse(parts[6]), double.Parse(parts[7]), parts[8])); break;
+		//				default:
+		//					continue; 
 
-					}
-				}
-			}
+		//			}
+		//		}
+		//	}
 
-			return result.ToArray();
-		}
+		//	return result.ToArray();
+		//}
 		static readonly string delimetr = "\n----------------------------------------------------------------------------------------------------------------------------\n";
 		static void Main(string[] args)
 		{
@@ -148,15 +148,27 @@ namespace Acadamy
 				Console.WriteLine(delimetr);
 			}
 
-			Save(group,@"group_data.txt");
+			Save(group, "group.txt");
+			//Save(group,@"group_data.txt");
 			
-			string filename = @"group_data.txt";
-			Human[] loadedGroup = Load(filename); 
-			foreach (Human h in loadedGroup)
-			{
-				Console.WriteLine(h.ToString()); 
-			}
+			//string filename = @"group_data.txt";
+			//Human[] loadedGroup = Load(filename); 
+			//foreach (Human h in loadedGroup)
+			//{
+			//	Console.WriteLine(h.ToString()); 
+			//}
 			
 		}
+		static void Save(Human[]group,string fileName)
+		{
+			StreamWriter writer = new StreamWriter(fileName);
+			for(int i = 0;i < group.Length;i++)
+			{
+				writer.WriteLine(group[i].ToStringCSV());
+			}
+			writer.Close();
+			System.Diagnostics.Process.Start("notepad",fileName);
+		}
+		
 	}
 }

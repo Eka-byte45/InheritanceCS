@@ -43,7 +43,11 @@ namespace Acadamy
 				$"{LastName.PadRight(16)}{FirstName.PadRight(16)}{Age.ToString().PadRight(5)}";
 			//PadRight() выравнивает строку по левому борту. От Padding - выравнивание
 		}
-
+		public virtual string ToStringCSV()
+		{
+			return this.GetType().ToString().Split('.').Last()+"," 
+			+$"{LastName},{FirstName},{Age}";
+		}
 
 	}
 }
