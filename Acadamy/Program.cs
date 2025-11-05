@@ -1,6 +1,6 @@
 ﻿//#define INHERITANCE_1
 //#define INHERITANCE_2
-//#define WRITE_TO_FILE
+#define WRITE_TO_FILE
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -150,82 +150,25 @@ namespace Acadamy
 				Console.WriteLine(group[i].ToString());
 				Console.WriteLine(delimetr);
 			}
-
-			Save(group, "group.txt");
+			//Streamer streamer = new Streamer();
+			//streamer.Save(group, "group.txt");
 			//Save(group,@"group_data.txt");
-			
+
 			//string filename = @"group_data.txt";
 			//Human[] loadedGroup = Load(filename); 
 			//foreach (Human h in loadedGroup)
 			//{
 			//	Console.WriteLine(h.ToString()); 
 			//}	
-			
+
+
 #endif
-			Human[] group= Load("group.txt");
-			Print(group);
-		}
-		static void Print(Human[] group)
-		{
-			
-			for (int i = 0; i < group.Length; i++)
-			{
-				Console.WriteLine(group[i]);
-                Console.WriteLine(delimetr);
-			}
-            Console.WriteLine();
-			
-		}
-		static void Save(Human[] group, string fileName)
-		{
-			StreamWriter writer = new StreamWriter(fileName);
-			for (int i = 0; i < group.Length; i++)
-			{
-				writer.WriteLine(group[i].ToStringCSV());
-			}
-			writer.Close();
-			System.Diagnostics.Process.Start("notepad", fileName);
+			Streamer streamer = new Streamer();
+			Human[] group= streamer.Load("group.txt");
+			streamer.Print(group);
 		}
 
-		static Human[] Load(string fileName)
-		{
-			List<Human> group = new List<Human>();
-			StreamReader reader = new StreamReader(fileName);
-			try
-			{
-				while (!reader.EndOfStream)
-				{
-					string buffer = reader.ReadLine();
-					string[] values = buffer.Split(',');
-					//Human human = HumanFactory(values.First());
-					//human.Init(values);
-					//group.Add(human);
-					group.Add(HumanFactory(values[0]).Init(values));
 
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine(ex.Message);
-			}
-			reader.Close();
-			return group.ToArray();
-
-		}
-		static Human HumanFactory(string type)
-		{
-			Human human = null;
-			switch (type)
-			{
-				case "Human": human = new Human("", "", 0); break;
-				case "Student": human = new Student("", "", 0, "", "", 0, 0); break;
-				case "Graduate": human = new Graduate("", "", 0, "", "", 0, 0, ""); break;
-				case "Teacher": human = new Teacher("", "", 0, "",0); break;
-
-			}
-			return human;
-
-		}
 
 
 	}	

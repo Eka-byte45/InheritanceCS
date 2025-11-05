@@ -1,0 +1,6 @@
+Student,Pinkman,Jessie ,22,Chemistry ,WW_220,9095
+Student,Varcetty,Tommy,30,Theft,Vice,9899
+Graduate,Schreder,Hank,40,Criminalistic,OBN,5060How to catch Heisenberg
+Teacher,White,Walter ,50Chemisrty ,25
+Teacher,Diaz,Ricardo,50Weaspon distribution ,20
+Teacher,Schwazenegger,Arnold,78Heavy Metal,65 
