@@ -1,5 +1,6 @@
 ﻿//#define INHERITANCE_1
 //#define INHERITANCE_2
+//#define WRITE_TO_FILE
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,10 +9,11 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Xml.Linq;
 using System.Diagnostics;
+using Acadamy;
 
 namespace Acadamy
 {
-	
+
 	internal class Program
 	{
 		//static void Save(Human[] group, string fileName)
@@ -29,24 +31,24 @@ namespace Acadamy
 		//		{
 		//			if (human is Human h && !(h is Teacher || h is Student || h is Graduate))
 		//			{
-						
+
 		//				sw.WriteLine("Human,{0},{1},{2}", h.LastName, h.FirstName, h.Age);
 		//			}
 		//			else if (human is Teacher t)
 		//			{
-						
+
 		//				sw.WriteLine("Teacher,{0},{1},{2},{3},{4}",
 		//					t.LastName, t.FirstName, t.Age, t.Speciality, t.Experience);
 		//			}
 		//			else if (human is Graduate g)
 		//			{
-						
+
 		//				sw.WriteLine("Graduate,{0},{1},{2},{3},{4},{5},{6},{7}",
 		//					g.LastName, g.FirstName, g.Age, g.Speciality, g.Group, g.Rating, g.Attendance, g.Subject);
 		//			}
 		//			else if (human is Student s)
 		//			{
-						
+
 		//				sw.WriteLine("Student,{0},{1},{2},{3},{4},{5},{6}",
 		//					s.LastName, s.FirstName, s.Age, s.Speciality, s.Group, s.Rating, s.Attendance);
 		//			}
@@ -87,6 +89,7 @@ namespace Acadamy
 		//	return result.ToArray();
 		//}
 		static readonly string delimetr = "\n----------------------------------------------------------------------------------------------------------------------------\n";
+
 		static void Main(string[] args)
 		{
 #if INHERITANCE_1
@@ -129,8 +132,8 @@ namespace Acadamy
 			graduate.Info();
 
 #endif
-
-			Human[] group =
+#if WRITE_TO_FILE
+            Human[] group =
 			{
 				new Student("Pinkman", "Jessie ", 22, "Chemistry ", "WW_220", 90, 95),
 				new Student("Varcetty","Tommy",30, "Theft","Vice",98,99),
@@ -156,19 +159,82 @@ namespace Acadamy
 			//foreach (Human h in loadedGroup)
 			//{
 			//	Console.WriteLine(h.ToString()); 
-			//}
+			//}	
+			
+#endif
+			Human[] group= Load("group.txt");
+			Print(group);
+		}
+		static void Print(Human[] group)
+		{
+			
+			for (int i = 0; i < group.Length; i++)
+			{
+				Console.WriteLine(group[i]);
+                Console.WriteLine(delimetr);
+			}
+            Console.WriteLine();
 			
 		}
-		static void Save(Human[]group,string fileName)
+		static void Save(Human[] group, string fileName)
 		{
 			StreamWriter writer = new StreamWriter(fileName);
-			for(int i = 0;i < group.Length;i++)
+			for (int i = 0; i < group.Length; i++)
 			{
 				writer.WriteLine(group[i].ToStringCSV());
 			}
 			writer.Close();
-			System.Diagnostics.Process.Start("notepad",fileName);
+			System.Diagnostics.Process.Start("notepad", fileName);
 		}
-		
-	}
+
+		static Human[] Load(string fileName)
+		{
+			List<Human> group = new List<Human>();
+			StreamReader reader = new StreamReader(fileName);
+			try
+			{
+				while (!reader.EndOfStream)
+				{
+					string buffer = reader.ReadLine();
+					string[] values = buffer.Split(',');
+					//Human human = HumanFactory(values.First());
+					//human.Init(values);
+					//group.Add(human);
+					group.Add(HumanFactory(values[0]).Init(values));
+
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
+			reader.Close();
+			return group.ToArray();
+
+		}
+		static Human HumanFactory(string type)
+		{
+			Human human = null;
+			switch (type)
+			{
+				case "Human": human = new Human("", "", 0); break;
+				case "Student": human = new Student("", "", 0, "", "", 0, 0); break;
+				case "Graduate": human = new Graduate("", "", 0, "", "", 0, 0, ""); break;
+				case "Teacher": human = new Teacher("", "", 0, "",0); break;
+
+			}
+			return human;
+
+		}
+
+
+	}	
 }
+	
+
+
+
+		
+		
+	
+

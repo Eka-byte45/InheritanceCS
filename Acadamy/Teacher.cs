@@ -46,5 +46,13 @@ namespace Acadamy
 			return base.ToStringCSV()+$"{Speciality},{Experience}";
 		}
 
+		public override Human Init(string[] values)
+		{
+			Speciality = values[4];
+			Experience = Convert.ToInt32(values[5]);
+			base.Init(values);
+			return this;
+		}
+
 	}
 }

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Acadamy;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -58,7 +60,19 @@ namespace Acadamy
 			return base.ToStringCSV()
 				+$",{Speciality},{Group},{Rating}{Attendance}";
 		}
+		public override Human Init(string[] values)
+		{
+			base.Init(values);
+			Speciality = values[4];
+			Group = values[5];
+			Rating =Convert.ToDouble(values[6]);
+			Attendance = Convert.ToDouble(values[7]);
+			return this;
+		}
 	}
 
 }
+
+
+
 
