@@ -164,7 +164,7 @@ namespace Acadamy
 
 #endif
 			Streamer streamer = new Streamer();
-			Human[] group= streamer.Load("group.txt");
+			Human[] group1= streamer.Load("group.txt");
 			streamer.Print(group);
 		}
 
