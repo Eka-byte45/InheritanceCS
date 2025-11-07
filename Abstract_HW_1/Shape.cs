@@ -14,5 +14,6 @@ namespace Abstract_HW_1
 		public abstract void Info();
 		public abstract void Draw(Graphics g);
 		public abstract void Draw();
+
 	}
 }
