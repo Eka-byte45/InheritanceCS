@@ -15,10 +15,10 @@ namespace AbstractGeometry
 		public double Radius
 		{
 			get => radius;
-			set => radius =
-				value < MIN_SIZE ? MIN_SIZE :
+			set => radius = FilterSize(value);
+				/*value < MIN_SIZE ? MIN_SIZE :
 				value > MAX_SIZE ? MAX_SIZE :
-				value;
+				value;*/
 		}
 
 		public Circle(double radius,int startX,int startY,int lineWidth,Color color)
@@ -31,10 +31,10 @@ namespace AbstractGeometry
 		public override double GetPerimeter()=> 2*Math.PI*Radius;
 		public override void Draw(PaintEventArgs e)
 		{
-			Pen pen = new Pen(Color);
-			SolidBrush brush = new SolidBrush(Color);
+			Pen pen = new Pen(Color,LineWidth);
+			//SolidBrush brush = new SolidBrush(Color);
 			e.Graphics.DrawEllipse(pen, StartX, StartY,(float)Radius*2,(float)Radius*2);
-			e.Graphics.FillEllipse(brush, StartX, StartY, (float)Radius*2, (float)Radius*2);
+			//e.Graphics.FillEllipse(brush, StartX, StartY, (float)Radius*2, (float)Radius*2);
 		}
 
 		public override void Info(PaintEventArgs e)

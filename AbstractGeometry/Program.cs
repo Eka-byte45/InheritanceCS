@@ -36,14 +36,17 @@ namespace AbstractGeometry
 			circle.Info(e);
 			Console.WriteLine(delimetr);
 
-			Triangle triangle = new Triangle(100,100,20,700,30,2,Color.DarkGreen);
-			triangle.Info(e);
-			Console.WriteLine(delimetr);
+			//Triangle triangle = new Triangle(100,100,20,700,30,2,Color.DarkGreen);
+			//triangle.Info(e);
+			//Console.WriteLine(delimetr);
 
-			RectangleTriangle triangle2 = new RectangleTriangle(900, 100, 2, Color.DarkTurquoise,50,90);
-			triangle2.Info(e);
+			//RectangleTriangle triangle2 = new RectangleTriangle(900, 100, 2, Color.DarkTurquoise,50,90);
+			//triangle2.Info(e);
 			
-
+			IsoscelesTriangle iso = new IsoscelesTriangle(75,150,700,30,3,Color.Blue);
+			iso.Info(e);
+			EquilaterTriangle equ = new EquilaterTriangle(50,800,20,4,Color.Yellow);
+			equ.Info(e);
 		}
 		[DllImport("kernel32.dll")]
 		public static extern IntPtr GetConsoleWindow();
