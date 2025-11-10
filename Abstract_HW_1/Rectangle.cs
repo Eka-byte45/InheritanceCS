@@ -65,8 +65,7 @@ namespace Abstract_HW_1
 					Console.SetCursorPosition(x+i, y+j);	
                     Console.WriteLine('*');
 				}
-			}
-			
+			}	
 		}
 
 	}
