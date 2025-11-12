@@ -1,4 +1,4 @@
-﻿#define ADSTRACT_1
+﻿#define ABSTRACT_1
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,24 +51,42 @@ namespace AbstractGeometry
 			equ.Info(e);
 			
 #endif
-		
-		Shape[] shapes =
-		{
-			new Rectangle(80, 50, 400, 60, 2, Color.Coral),
-			new Square(75, 500, 50, 3, Color.Red),
-			new Circle(55, 600, 40, 2, Color.BlueViolet),
-			new IsoscelesTriangle(75, 150, 700, 30, 3, Color.Blue),
-			new EquilaterTriangle(50, 800, 20, 4, Color.Yellow)
-		};
 
-		for(int i = 0; i < shapes.Length;++i)
-		{
-			if (!(shapes[i] is IHaveDiagonal))
+			//Shape[] shapes =
+			//{
+			//	new Rectangle(80, 50, 400, 60, 2, Color.Coral),
+			//	new Square(75, 500, 50, 3, Color.Red),
+			//	new Circle(55, 600, 40, 2, Color.BlueViolet),
+			//	new IsoscelesTriangle(75, 150, 700, 30, 3, Color.Blue),
+			//	new EquilaterTriangle(50, 800, 20, 4, Color.Yellow)
+			//};
+			/*Console.WriteLine("Есть диагональ у следующих фигур: ");
+			for (int i = 0; i < shapes.Length; ++i)
 			{
-				shapes[i].Draw(e);
-			}	
+				if ((shapes[i] is IHaveDiagonal))
+				{
+					shapes[i].Draw(e);
+				}
+			}*/
+
+			/*Console.WriteLine("Есть диаметр у следующих фигур: ");
+			for (int i = 0; i < shapes.Length; ++i)
+			{
+				if ((shapes[i] is IHaveDiameter))
+				{
+					shapes[i].Draw(e);
+				}
+			}*/
+
+			/*Console.WriteLine("Есть высота у следующих фигур: ");
+			for (int i = 0; i < shapes.Length; ++i)
+			{
+				if ((shapes[i] is IHaveHeight))
+				{
+					shapes[i].Draw(e);
+				}
+			}*/
 		}
-	}
 		[DllImport("kernel32.dll")]
 		public static extern IntPtr GetConsoleWindow();
 	}

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 namespace AbstractGeometry
 {
 	 
-	internal class Circle : Shape
+	internal class Circle : Shape,IHaveDiameter
 	{
 		double radius;
 		public double Radius
@@ -29,6 +29,21 @@ namespace AbstractGeometry
 
 		public override double GetArea()=> Math.PI*Math.Pow(Radius,2);
 		public override double GetPerimeter()=> 2*Math.PI*Radius;
+		public double GetDiameter() => 2 * Radius;
+
+		public void DrawDiameter(System.Windows.Forms.PaintEventArgs e)
+		{
+			Pen pen = new Pen(Color,LineWidth);
+			float centerX = StartX + (float)Radius;
+			float centerY = StartY + (float)Radius;
+
+			float startX = centerX - (float)Radius;
+			float startY = centerY;
+			float endX = centerX + (float)Radius;
+			float endY = centerY;
+			e.Graphics.DrawLine(pen, startX, startY, endX, endY);
+		}
+		
 		public override void Draw(PaintEventArgs e)
 		{
 			Pen pen = new Pen(Color,LineWidth);
@@ -41,7 +56,9 @@ namespace AbstractGeometry
 		{
 			Console.WriteLine(this.GetType().ToString().Split('.').Last() + ":");
 			Console.WriteLine($"Радиус:{Radius}");
+            Console.WriteLine($"Диаметр: {GetDiameter()}");
 			base.Info(e);
+			DrawDiameter(e);
 		}
 	}
 }

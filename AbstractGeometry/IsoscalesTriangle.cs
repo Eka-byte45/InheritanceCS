@@ -58,11 +58,22 @@ namespace AbstractGeometry
 			e.Graphics.DrawPolygon(pen, vertices);
 				
 		}
+		public override void DrawHeigth(PaintEventArgs e)
+		{
+			Pen pen = new Pen(Color, 1);
+			float centerX = StartX + (float)(Base/2);
+			float topY = StartY;
+			float bottomY = StartY + (float)GetHeigth();
+			e.Graphics.DrawLine(pen,centerX,topY,centerX,bottomY);
+		}
+
 		public override void Info(PaintEventArgs e)
 		{
-            Console.WriteLine($"Основание: {Base}");
+			Console.WriteLine(this.GetType().ToString().Split('.').Last() + ":");
+			Console.WriteLine($"Основание: {Base}");
             Console.WriteLine($"Сторона: {Side}");
 			base.Info(e);
+			DrawHeigth(e);
 		}
 	}
 }

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace AbstractGeometry
 {
-	abstract class Triangle : Shape
+	abstract class Triangle : Shape,IHaveHeight
 	{
 		//protected double A, B, C;
 
@@ -66,11 +66,13 @@ namespace AbstractGeometry
 		//}
 
 		public abstract double GetHeigth();
+		public abstract void DrawHeigth(System.Windows.Forms.PaintEventArgs e);
 		public Triangle(int startX,int startY, int lineWidth,System.Drawing.Color color):
 			base(startX, startY, lineWidth, color) { }
 
 		public override void Info(PaintEventArgs e)
 		{
+
             Console.WriteLine($"Высота треугольника: {GetHeigth()}");
 			base.Info(e);
 		}

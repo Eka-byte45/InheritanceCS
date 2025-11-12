@@ -44,19 +44,19 @@ namespace AbstractGeometry
 		}
 		public void DrawDiagonal(System.Windows.Forms.PaintEventArgs e)
 		{
-			Pen pen = new Pen(Color,LineWidth);
+			Pen pen = new Pen(Color,1);
 			e.Graphics.DrawLine
 				(
 				pen,
 				StartX,StartY,
 				StartX+(int)Width, StartY+(int)Height);
 		}
-		public override void Draw(PaintEventArgs e)
+		public override void Draw(System.Windows.Forms.PaintEventArgs e)
 		{
-			Pen pen = new Pen(Color,1);
-			SolidBrush brush = new SolidBrush(Color);
+			Pen pen = new Pen(Color,LineWidth);
+			//SolidBrush brush = new SolidBrush(Color);
 			e.Graphics.DrawRectangle(pen, StartX,StartY,(float)Width,(float)Height);
-			e.Graphics.FillRectangle(brush,StartX,StartY,(float)Width, (float)Height);
+			//e.Graphics.FillRectangle(brush,StartX,StartY,(float)Width, (float)Height);
 		}
 		public override void Info(PaintEventArgs e)
 		{
